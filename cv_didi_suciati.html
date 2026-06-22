@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport dioptimalkan agar responsif sempurna di Android, iPhone, Tablet & PC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Enterprise CV - Didi Suciati</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow-indigo': '0 0 15px -3px rgba(99, 102, 241, 0.3)',
+                        'glow-emerald': '0 0 15px -3px rgba(16, 185, 129, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.02) 0%, transparent 40%);
+            -webkit-tap-highlight-color: transparent; /* Optimalisasi sentuhan pada layar HP/Tablet */
+        }
+        .dark body {
+            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+        }
+        /* Cetak A4 Sempurna */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #0f172a !important;
+                background-image: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-shadow-none {
+                box-shadow: none !important;
+            }
+            .print-border {
+                border: 1px solid #e2e8f0 !important;
+            }
+            .print-p-0 {
+                padding: 0 !important;
+            }
+            .print-m-0 {
+                margin: 0 !important;
+            }
+            .print-text-dark {
+                color: #0f172a !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 pb-24 md:pb-12">
+
+    <!-- Floating Action Toolbar (Disembunyikan saat cetak) -->
+    <div class="no-print fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 flex items-center justify-between sm:justify-end gap-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800">
+        <!-- Switch Tema Light/Dark -->
+        <button id="themeToggle" class="p-3 sm:p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" title="Ganti Tema">
+            <!-- Sun Icon (Light Mode) -->
+            <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707m2.828 9.9a5 5 0 117.072-7.072 5 5 0 01-7.072 7.072z"></path></svg>
+            <!-- Moon Icon (Dark Mode) -->
+            <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+        <!-- Tombol Cetak PDF -->
+        <button onclick="window.print()" class="flex-1 sm:flex-initial flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-3 sm:py-2.5 rounded-xl transition-all shadow-md shadow-indigo-600/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500" title="Cetak CV / Simpan PDF">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            <span class="text-sm font-sans">Cetak PDF / A4</span>
+        </button>
+    </div>
+
+    <!-- MAIN DASHBOARD WRAPPER -->
+    <div class="max-w-6xl mx-auto my-0 sm:my-6 md:my-10 bg-white dark:bg-slate-900/90 shadow-2xl rounded-none sm:rounded-3xl overflow-hidden print:shadow-none print:rounded-none print:my-0 border-x-0 sm:border border-slate-150 dark:border-slate-800/85 transition-all duration-300">
+        
+        <!-- TOP DECORATION CONSOLE PANEL -->
+        <div class="no-print h-9 bg-slate-100 dark:bg-slate-950 px-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="flex items-center gap-1.5 min-w-0">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80 shrink-0"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80 shrink-0"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80 shrink-0"></span>
+                <span class="text-[9px] sm:text-[10px] font-mono text-slate-400 dark:text-slate-500 ml-2 sm:ml-4 truncate">GATEWAY_CONNECTED // SECURE_SSL_TLS</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-4 shrink-0">
+                <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500">SESSION_LATENCY: &lt;12ms</span>
+                <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500">REV: 2026.06</span>
+            </div>
+        </div>
+
+        <!-- HEADER SECTION -->
+        <header class="p-6 sm:p-10 lg:p-12 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-8">
+                <div class="w-full lg:max-w-2xl">
+                    <div class="flex items-center gap-2 text-[10px] sm:text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold tracking-widest uppercase mb-2">
+                        <span class="inline-block w-2.5 h-2.5 bg-indigo-500 rounded-sm shrink-0"></span> SYSTEM_ADMINISTRATOR // INFRASTRUCTURE
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase font-sans break-words">
+                        Didi Suciati
+                    </h1>
+                    <p class="text-slate-600 dark:text-slate-300 font-semibold text-base sm:text-lg lg:text-xl mt-2 flex flex-wrap items-center gap-2">
+                        Senior IT Infrastructure & Server Administrator
+                        <span class="text-xs font-mono font-normal text-slate-400 dark:text-slate-500 break-all">[Senior Level &gt; 10 Years]</span>
+                    </p>
+                    
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 shadow-glow-emerald">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span> SYSTEM STATUS: ONLINE
+                        </span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300 border border-indigo-100/50 dark:border-indigo-900/50">
+                            Praktisi Senior Lapangan
+                        </span>
+                        <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                            Spesialis Sistem Tangguh
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Contact Deck -->
+                <div class="w-full lg:w-auto grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-3">
+                    <!-- Kirim Email -->
+                    <button onclick="copyContact('didisct@gmail.com', 'Email')" class="group flex items-center gap-3.5 p-3 rounded-xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 dark:hover:border-indigo-500 hover:shadow-glow-indigo text-left transition-all duration-300 w-full lg:w-72 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <div class="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-lg text-slate-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[9px] font-mono uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest">KIRIM EMAIL</p>
+                            <p class="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">didisct@gmail.com</p>
+                        </div>
+                    </button>
+                    <!-- Hubungi WhatsApp -->
+                    <button onclick="copyContact('087771187872', 'Nomor WhatsApp')" class="group flex items-center gap-3.5 p-3 rounded-xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 dark:hover:border-indigo-500 hover:shadow-glow-indigo text-left transition-all duration-300 w-full lg:w-72 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <div class="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-lg text-slate-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[9px] font-mono uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest">HUBUNGI WHATSAPP</p>
+                            <p class="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">087771187872</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT DIVISION -->
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+            
+            <!-- LEFT SIDEBAR -->
+            <aside class="lg:col-span-4 p-6 sm:p-8 lg:p-10 bg-slate-50/50 dark:bg-slate-900/20 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex flex-col gap-6 lg:gap-8">
+                
+                <!-- Ringkasan Sistem -->
+                <div class="p-5 bg-white dark:bg-slate-950/60 rounded-2xl border border-slate-200 dark:border-slate-800/80 shadow-sm relative">
+                    <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-indigo-500 shadow-glow-indigo"></div>
+                    <h2 class="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 flex items-center gap-2">
+                        [01] RINGKASAN SISTEM
+                    </h2>
+                    <p class="text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                        Spesialis infrastruktur IT dengan dedikasi tinggi pada kestabilan operasional korporat. Memiliki rekam jejak yang solid dalam mengontrol arsitektur server, membangun jaringan aman lintas cabang, serta menyederhanakan alur kerja manual melalui integrasi otomasi digital.
+                    </p>
+                </div>
+
+                <!-- Keahlian / Stack -->
+                <div>
+                    <h2 class="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4 flex items-center gap-2">
+                        [02] SPESIFIKASI KEAHLIAN / STACK
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- Server Blade -->
+                        <div class="group p-4 bg-white dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-800/60 hover:border-indigo-500/50 transition-all duration-300">
+                            <div class="flex justify-between items-center mb-2.5">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-sans">Administrasi Server & OS</span>
+                                <span class="text-[10px] font-mono text-indigo-500 shrink-0">Level: Senior</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Windows Server</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Active Directory</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">VPS</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Linux OS (Mengenal)</span>
+                            </div>
+                        </div>
+
+                        <!-- Network Blade -->
+                        <div class="group p-4 bg-white dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-800/60 hover:border-indigo-500/50 transition-all duration-300">
+                            <div class="flex justify-between items-center mb-2.5">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-sans">Jaringan & Keamanan</span>
+                                <span class="text-[10px] font-mono text-indigo-500 shrink-0">Level: Expert</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">MikroTik Router</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">VPN Tunneling</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Firewalls</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Bandwidth QoS</span>
+                            </div>
+                        </div>
+
+                        <!-- DB & Automation Blade -->
+                        <div class="group p-4 bg-white dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-800/60 hover:border-indigo-500/50 transition-all duration-300">
+                            <div class="flex justify-between items-center mb-2.5">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-sans">Otomasi & Basis Data</span>
+                                <span class="text-[10px] font-mono text-indigo-500 shrink-0">Level: Specialist</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">MySQL</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">PostgreSQL</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Power Automate</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Power Apps</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">PHP (Custom Web)</span>
+                            </div>
+                        </div>
+
+                        <!-- Hardware Support Blade -->
+                        <div class="group p-4 bg-white dark:bg-slate-950/40 rounded-xl border border-slate-150 dark:border-slate-800/60 hover:border-indigo-500/50 transition-all duration-300">
+                            <div class="flex justify-between items-center mb-2.5">
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 font-sans">Sistem Fisik & Perangkat</span>
+                                <span class="text-[10px] font-mono text-indigo-500 shrink-0">Level: Advanced</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">Dell PowerEdge</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">QR/Barcode Label</span>
+                                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-800/50">AnyDesk System</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Karakter Kerja -->
+                <div class="p-5 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-2xl border border-indigo-100/50 dark:border-indigo-900/50">
+                    <h2 class="text-[10px] font-mono font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 flex items-center gap-2">
+                        [03] KARAKTER KERJA SENIOR
+                    </h2>
+                    <ul class="text-xs space-y-3.5 text-slate-600 dark:text-slate-400">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                            <span><b>Pencegah Krisis (Preventive Focus):</b> Mengutamakan mitigasi risiko terencana dibanding sibuk memperbaiki sistem setelah rusak.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                            <span><b>Optimalisasi Anggaran:</b> Berorientasi pada efisiensi biaya, utilisasi hardware maksimal, dan minimasi pengeluaran berlebih.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-emerald-500 mt-0.5 shrink-0">✔</span>
+                            <span><b>Komunikasi Profesional:</b> Mampu memaparkan masalah infrastruktur yang rumit dengan bahasa bisnis yang mudah dipahami direksi.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </aside>
+
+            <!-- RIGHT MAIN PANEL -->
+            <main class="lg:col-span-8 p-6 sm:p-8 lg:p-10 flex flex-col gap-8 lg:gap-10">
+                
+                <!-- Work Logs -->
+                <section>
+                    <h2 class="text-sm sm:text-base font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6 flex items-center gap-2.5">
+                        <svg class="w-5 h-5 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        RIWAYAT PEKERJAAN &amp; ARSITEKTUR SISTEM
+                    </h2>
+
+                    <!-- Job Node 1 -->
+                    <div class="relative border-l-2 border-slate-200 dark:border-slate-800 pl-5 sm:pl-6 pb-8 last:pb-0">
+                        <div class="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-indigo-600 ring-4 ring-indigo-100 dark:ring-indigo-950"></div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+                            <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white">
+                                IT Support / Infrastructure Specialist
+                            </h3>
+                            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-900/50 shrink-0">
+                                2015 - SEKARANG
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">PT Airindo Sakti &amp; PT Kobelindo Compressors | Holding Group</p>
+                        
+                        <ul class="text-xs sm:text-sm space-y-3 text-slate-600 dark:text-slate-400">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-indigo-500 dark:text-indigo-400 font-mono mt-0.5 shrink-0">●</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Manajemen Server Utama:</strong> Bertanggung jawab penuh atas migrasi, setup awal (*clean install*), dan stabilitas sistem operasi Windows Server pada perangkat fisik *on-premise* **Dell PowerEdge** beserta pengelolaan database kustom (MySQL/PostgreSQL).</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-indigo-500 dark:text-indigo-400 font-mono mt-0.5 shrink-0">●</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Arsitektur Konektivitas Jaringan:</strong> Merancang dan membangun topologi jaringan tangguh lintas cabang (Holding-Subsidiary) menggunakan MikroTik Router, setup jalur VPN Tunneling terenkripsi (*masked*), serta manajemen *bandwidth rules* demi keandalan data.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-indigo-500 dark:text-indigo-400 font-mono mt-0.5 shrink-0">●</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Mitigasi Keamanan Siber:</strong> Mengatur prosedur pencegahan bencana (*Disaster Recovery*) dengan manajemen backup data internal berskala besar (120GB+) secara otomatis ke segmentasi aman guna menjamin proteksi data bisnis.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Job Node 2 -->
+                    <div class="relative border-l-2 border-slate-200 dark:border-slate-800 pl-5 sm:pl-6 pb-2">
+                        <div class="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+                            <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white">IT Support Technician</h3>
+                            <span class="text-[10px] font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 shrink-0">
+                                SEBELUM 2015
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">Penyedia Layanan IT / Retail Mandiri</p>
+                        
+                        <ul class="text-xs sm:text-sm space-y-3 text-slate-600 dark:text-slate-400">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-slate-400 font-mono mt-0.5 shrink-0">●</span>
+                                <span>Mengelola kestabilan jaringan LAN/WLAN kantor, instalasi, optimalisasi perangkat keras komputer staf, serta koordinasi teknis bersama vendor ISP.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-slate-400 font-mono mt-0.5 shrink-0">●</span>
+                                <span>Merancang sistem dukungan jarak jauh menggunakan AnyDesk untuk menyelesaikan kendala teknis pengguna (*user support*) dengan waktu penanganan yang cepat.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- INTERACTIVE TERMINAL CONSOLE -->
+                <section class="no-print bg-slate-950 rounded-2xl border border-slate-850 shadow-2xl overflow-hidden font-mono text-xs">
+                    <div class="bg-slate-900 px-4 py-2.5 flex items-center justify-between border-b border-slate-850">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <div class="flex gap-1.5 shrink-0">
+                                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                            </div>
+                            <span class="text-slate-400 text-[10px] ml-2 truncate">didi-suciati-terminal v2.6 // Interactive</span>
+                        </div>
+                        <span class="text-emerald-500 text-[10px] animate-pulse shrink-0">● LIVE CONSOLE</span>
+                    </div>
+                    <div class="p-4 sm:p-5 text-slate-300 min-h-[160px] flex flex-col gap-2 overflow-x-auto">
+                        <div>didi@infra-core:~$ <span class="text-indigo-400">welcome.sh</span></div>
+                        <div id="terminalOutput" class="text-emerald-400 leading-relaxed whitespace-pre-line break-all">Klik tombol perintah cepat di bawah ini untuk menguji kapabilitas server Didi Suciati...</div>
+                    </div>
+                    <div class="bg-slate-900/60 p-3 border-t border-slate-850 flex flex-wrap gap-2">
+                        <button onclick="runConsole('cat info.txt')" class="flex-1 sm:flex-initial px-3 py-2 sm:py-1.5 rounded bg-slate-800 hover:bg-indigo-600 hover:text-white transition-all text-slate-300 border border-slate-700/60 font-medium text-center focus:outline-none focus:ring-2 focus:ring-indigo-500">cat info.txt</button>
+                        <button onclick="runConsole('ping -c 3 gateway')" class="flex-1 sm:flex-initial px-3 py-2 sm:py-1.5 rounded bg-slate-800 hover:bg-indigo-600 hover:text-white transition-all text-slate-300 border border-slate-700/60 font-medium text-center focus:outline-none focus:ring-2 focus:ring-indigo-500">ping -c 3 gateway</button>
+                        <button onclick="runConsole('get system_status')" class="flex-1 sm:flex-initial px-3 py-2 sm:py-1.5 rounded bg-slate-800 hover:bg-indigo-600 hover:text-white transition-all text-slate-300 border border-slate-700/60 font-medium text-center focus:outline-none focus:ring-2 focus:ring-indigo-500">get system_status</button>
+                        <button onclick="runConsole('clear')" class="px-3 py-2 sm:py-1.5 rounded bg-slate-800/40 hover:bg-rose-900 hover:text-white transition-all text-rose-400 border border-rose-950 font-medium text-center focus:outline-none focus:ring-2 focus:ring-rose-500">clear</button>
+                    </div>
+                </section>
+
+                <!-- Project Cards -->
+                <section class="bg-slate-50/50 dark:bg-slate-950/20 p-5 sm:p-6 lg:p-8 rounded-2xl border border-slate-200 dark:border-slate-800/80">
+                    <h2 class="text-sm sm:text-base font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6 flex items-center gap-2.5">
+                        <svg class="w-5 h-5 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        PROYEK PENGEMBANGAN &amp; OTOMASI MANDIRI
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Project 1 -->
+                        <div class="bg-white dark:bg-slate-950/60 p-5 rounded-xl border border-slate-150 dark:border-slate-800/80 shadow-sm hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-mono text-indigo-500 dark:text-indigo-400 font-bold uppercase tracking-widest">[PROYEK_01]</span>
+                                <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-1 mb-2">Sistem Pelacak Inventaris Internal</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                    Membangun sistem inventaris berbasis web menggunakan **PHP dan database MySQL** secara mandiri. Mengintegrasikan label Barcode/QR berukuran 70x40mm untuk melacak aset keras perusahaan, yang berhasil memangkas waktu proses audit tahunan sebanyak 60%.
+                                </p>
+                            </div>
+                            <span class="inline-block self-start text-[9px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-500">Stack: PHP, MySQL, CSS, JS</span>
+                        </div>
+                        
+                        <!-- Project 2 -->
+                        <div class="bg-white dark:bg-slate-950/60 p-5 rounded-xl border border-slate-150 dark:border-slate-800/80 shadow-sm hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-mono text-indigo-500 dark:text-indigo-400 font-bold uppercase tracking-widest">[PROYEK_02]</span>
+                                <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-1 mb-2">Otomasi Alur Kerja &amp; Geolocation</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                    Merancang alur persetujuan digital (*multi-level approval flows*) dan sistem absensi berbasis geolokasi presisi dengan memanfaatkan **Microsoft Power Platform (Power Apps &amp; Power Automate)** yang diintegrasikan langsung dengan basis data cloud SharePoint.
+                                </p>
+                            </div>
+                            <span class="inline-block self-start text-[9px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-500">Stack: Power Apps, Power Automate, SharePoint</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Education & Professional Integrity -->
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Education -->
+                    <div class="flex flex-col">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3.5 flex items-center gap-2">
+                            Pendidikan
+                        </h2>
+                        <div class="flex-1 p-5 bg-slate-50/50 dark:bg-slate-950/40 rounded-2xl border border-slate-150 dark:border-slate-800/80">
+                            <p class="text-sm font-bold text-slate-800 dark:text-slate-200">Pendidikan Menengah Atas (SMA)</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Fokus pada Praktisi Teknisi &amp; Pembelajaran Mandiri</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">
+                                Menititikberatkan komitmen penuh pada pengumpulan jam terbang industri yang kokoh, sertifikasi otodidak, serta penguasaan arsitektur jaringan secara mendalam langsung di lapangan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Commitment -->
+                    <div class="flex flex-col">
+                        <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3.5 flex items-center gap-2">
+                            Komitmen Layanan
+                        </h2>
+                        <div class="flex-1 p-5 bg-indigo-50/20 dark:bg-indigo-950/10 rounded-2xl border border-indigo-150 dark:border-indigo-950/30 flex flex-col justify-between">
+                            <p class="text-xs italic text-slate-600 dark:text-slate-400 leading-relaxed">
+                                "Saya menawarkan integritas tinggi, kedisiplinan tingkat lanjut untuk meminimalkan kegagalan sistem, loyalitas jangka panjang terhadap tata kelola IT korporat, serta pembawaan tenang dan taktis saat menangani krisis data."
+                            </p>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 mt-3">— Didi Suciati</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- FOOTER DECK -->
+        <footer class="no-print bg-slate-50 dark:bg-slate-950 p-6 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-400 dark:text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-mono text-[9px] sm:text-[10px]">CV_SECURE_CONSOLE_SYS // SYSTEM STATUS: ACTIVE</p>
+            <p>Didesain dengan pendekatan standar ATS agar optimal saat diekspor sebagai dokumen PDF.</p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="no-print fixed bottom-20 left-4 right-4 sm:bottom-6 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 w-[calc(100%-2rem)] sm:w-auto sm:max-w-md bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none transform translate-y-2 border border-slate-850 dark:border-slate-100/20">
+        <svg class="w-5 h-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span id="toastMsg" class="text-xs font-semibold font-sans">Data berhasil disalin!</span>
+    </div>
+
+    <script>
+        // DARK MODE TOGGLE LOGIC
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const htmlElement = document.documentElement;
+
+        if (!localStorage.theme) {
+            localStorage.theme = 'dark';
+        }
+
+        if (localStorage.theme === 'dark') {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.theme = 'light';
+            } else {
+                htmlElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // CONTACT COPY FUNCTION (Optimized for secure sandbox environments)
+        function copyContact(textToCopy, fieldName) {
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast(`${fieldName} "${textToCopy}" berhasil disalin!`);
+                } else {
+                    showToast(`Gagal menyalin ${fieldName}`);
+                }
+            } catch (err) {
+                showToast(`Error: Tidak dapat menyalin ${fieldName}`);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // CUSTOM TOAST CONTROLLER
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+            }, 3500);
+        }
+
+        // INTERACTIVE TERMINAL ENGINE
+        function runConsole(command) {
+            const output = document.getElementById('terminalOutput');
+            
+            if (command === 'clear') {
+                output.textContent = 'Menunggu perintah berikutnya...';
+                return;
+            }
+            
+            output.textContent = 'Mengeksekusi perintah: ' + command + '...\n\n';
+            
+            setTimeout(() => {
+                switch(command) {
+                    case 'cat info.txt':
+                        output.innerHTML = `Nama      : Didi Suciati\nSpesialis : Server & Infrastructure Administrator\nKeahlian  : Active Directory, MikroTik Jaringan, Automation\nSistem OS : Windows Server, Linux RedHat/Ubuntu (Mengenal)`;
+                        break;
+                    case 'ping -c 3 gateway':
+                        output.innerHTML = `PING didi-suciati-gateway (192.168.1.1) 56(84) bytes of data.\n64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=1.04 ms\n64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.98 ms\n64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=1.12 ms\n\n--- 192.168.1.1 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2002ms\nrtt min/avg/max/mdev = 0.982/1.046/1.121/0.057 ms`;
+                        break;
+                    case 'get system_status':
+                        output.innerHTML = `[SERVER STATS]\n● Dell_PowerEdge_AD_Server  : ONLINE (Uptime: 312d)\n● MikroTik_Corporate_Router : ONLINE (CPU Load: 4%)\n● Web_Asset_Tracker_DB     : ONLINE (MySQL 8.0)\n● Automated_Backup_Service : ACTIVE (Next run: 00:00 WIB)\n● Disaster_Recovery_Ready  : TRUE`;
+                        break;
+                    default:
+                        output.textContent = 'Command not found. Silakan pilih tombol perintah cepat di bawah.';
+                }
+            }, 450);
+        }
+    </script>
+</body>
+</html>
